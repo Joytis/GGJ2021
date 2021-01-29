@@ -1,0 +1,15 @@
+[submodule "Submodules/com.lwg.divination"]
+	path = Submodules/com.lwg.divination
+	url = https://gitlab.com/littlewizardgames/com.lwg.divination
+[submodule "Submodules/com.lwg.core"]
+	path = Submodules/com.lwg.core
+	url = https://gitlab.com/littlewizardgames/com.lwg.core.git
+[submodule "Submodules/spaghetty"]
+	path = Submodules/spaghetty
+	url = https://gitlab.com/klinetr/spaghetty.git
+[submodule "Submodules/com.lwg.lexicon"]
+	path = Submodules/com.lwg.lexicon
+	url = https://gitlab.com/littlewizardgames/com.lwg.lexicon.git
+[submodule "Submodules/com.lwg.spellbook"]
+	path = Submodules/com.lwg.spellbook
+	url = https://gitlab.com/littlewizardgames/com.lwg.spellbook.git
