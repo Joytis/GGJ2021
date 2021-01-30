@@ -9,9 +9,6 @@ namespace ActiveRagdoll {
     /// one from the player or from another script) and internal (kind of like sensors, such as
     /// detecting if it's on floor). </summary>
     public class InputModule : Module {
-        // ---------- EXTERNAL INPUT ----------
-        ActiveRagdollActions _inputActions = default;
-
         public event Action<Vector2> onMove;
         public event Action<Vector2> onLook;
         public event Action<Vector2> onScrollWheel;
@@ -30,9 +27,11 @@ namespace ActiveRagdoll {
         Rigidbody _rightFoot = default;
         Rigidbody _leftFoot = default;
 
-        void Awake() => _inputActions = new ActiveRagdollActions();
-        void OnEnable() => _inputActions.Enable();
-        void OnDisable() => _inputActions.Disable();
+        void OnMove(InputValue value) => onMove?.Invoke(value.Get<Vector2>());
+        void OnLeftArm(InputValue value) => onLeftArm?.Invoke(value.Get<float>());
+        void OnRightArm(InputValue value) => onRightArm?.Invoke(value.Get<float>());
+        void OnLook(InputValue value) => onLook?.Invoke(value.Get<Vector2>());
+        void OnScrllWheel(InputValue value) => onRightArm?.Invoke(value.Get<float>());
 
         void Start() 
         {
@@ -42,13 +41,6 @@ namespace ActiveRagdoll {
 
         void Update() 
         {
-            // Continuous actions. 
-            onMove?.Invoke(_inputActions.Player.Move.ReadValue<Vector2>());
-            onLeftArm?.Invoke(_inputActions.Player.LeftArm.ReadValue<float>());
-            onRightArm?.Invoke(_inputActions.Player.RightArm.ReadValue<float>());
-            onLook?.Invoke(_inputActions.Player.Look.ReadValue<Vector2>());
-            onScrollWheel?.Invoke(_inputActions.Player.ScrollWheel.ReadValue<Vector2>());
-
             bool lastIsOnFloor = _isOnFloor;
 
             _isOnFloor = CheckRigidbodyOnFloor(_rightFoot, out var _) || CheckRigidbodyOnFloor(_leftFoot, out _);

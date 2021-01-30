@@ -53,8 +53,6 @@ namespace ActiveRagdoll
         public Vector3 TargetDirection { get; set; }
         private Quaternion _targetRotation;
 
-
-
         private void Start() {
             UpdateTargetRotation();
             InitializeStabilizerJoint();
@@ -79,8 +77,6 @@ namespace ActiveRagdoll
         private void FixedUpdate() {
             UpdateTargetRotation();
             ApplyCustomDrag();
-
-            Debug.Log(_balanceMode);
 
             switch (_balanceMode) {
                 case BalanceMode.UprightTorque:
@@ -137,6 +133,7 @@ namespace ActiveRagdoll
         }
 
         public void SetBalanceMode(BalanceMode balanceMode) {
+            if (_balanceMode == balanceMode) return;
             StopBalance();
             _balanceMode = balanceMode;
             StartBalance();

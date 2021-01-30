@@ -7,6 +7,7 @@ using UnityEngine;
 namespace ActiveRagdoll {
     // Author: Sergio Abreu García | https://sergioabreu.me
 
+    [Serializable]
     public struct JointDriveConfig {
         // Variables are exposed in the editor, but are kept readonly from code since
         // changing them would have no effect until assigned to a JointDrive.
@@ -59,25 +60,33 @@ namespace ActiveRagdoll {
     }
 
     [Serializable]
-    public class BodyPart 
-    {
-        [SerializeField] private ConfigurableJoint[] _joints;
-        private List<JointDriveConfig> _xjointDriveConfigs = new List<JointDriveConfig>();
-        private List<JointDriveConfig> _yzjointDriveConfigs = new List<JointDriveConfig>();
+    public class BodyPart {
 
-        public void Init() 
-        {
+        [SerializeField] private List<ConfigurableJoint> _joints;
+        private List<JointDriveConfig> XjointDriveConfigs;
+        private List<JointDriveConfig> YZjointDriveConfigs;
+
+        public BodyPart(string name, List<ConfigurableJoint> joints) {
+            _joints = joints;
+        }
+
+        public void Init() {
+            XjointDriveConfigs = new List<JointDriveConfig>();
+            YZjointDriveConfigs = new List<JointDriveConfig>();
+
             foreach (ConfigurableJoint joint in _joints) {
-                _xjointDriveConfigs.Add((JointDriveConfig) joint.angularXDrive);
-                _yzjointDriveConfigs.Add((JointDriveConfig) joint.angularYZDrive);
+                XjointDriveConfigs.Add((JointDriveConfig) joint.angularXDrive);
+                YZjointDriveConfigs.Add((JointDriveConfig) joint.angularYZDrive);
             }
+
         }
 
         public void SetStrengthScale(float scale) {
-            for (int i = 0; i < _joints.Length; i++) {
-                _joints[i].angularXDrive = (JointDrive) (_xjointDriveConfigs[i] * scale);
-                _joints[i].angularYZDrive = (JointDrive) (_yzjointDriveConfigs[i] * scale);
+            for (int i = 0; i < _joints.Count; i++) {
+                _joints[i].angularXDrive = (JointDrive) (XjointDriveConfigs[i] * scale);
+                _joints[i].angularYZDrive = (JointDrive) (YZjointDriveConfigs[i] * scale);
             }
+
         }
     }
 

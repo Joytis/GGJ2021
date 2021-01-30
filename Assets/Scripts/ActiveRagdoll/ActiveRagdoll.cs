@@ -78,18 +78,6 @@ namespace ActiveRagdoll {
             AnimatorHelper = _animatedAnimator.gameObject.AddComponent<AnimatorHelper>();
         }
 
-        private ConfigurableJoint[] GetJoints(params HumanBodyBones[] bones) 
-        {
-            List<ConfigurableJoint> jointList = new List<ConfigurableJoint>();
-            foreach (HumanBodyBones bone in bones) {
-                Transform boneTransform = _physicalAnimator.GetBoneTransform(bone);
-                if (boneTransform != null && (boneTransform.TryGetComponent(out ConfigurableJoint joint)))
-                    jointList.Add(joint);
-            }
-
-            return jointList.ToArray();
-        }
-
         private void FixedUpdate() {
             SyncAnimatedBody();
         }

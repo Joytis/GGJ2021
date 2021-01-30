@@ -28,7 +28,8 @@ public class DefaultBehaviour : MonoBehaviour {
         _input.onMove += _physicsModule.ManualTorqueInput;
         _input.onFloorChanged += ProcessFloorChanged;
 
-        _input.onLook += _cameraModule.OnLook;
+        _input.onLook += _cameraModule.Look;
+        _input.onScrollWheel += _cameraModule.ScrollWheel;
 
         _input.onLeftArm += _animationModule.UseLeftArm;
         _input.onLeftArm += _gripModule.UseLeftGrip;
