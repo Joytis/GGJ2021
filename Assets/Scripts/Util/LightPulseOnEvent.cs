@@ -25,7 +25,6 @@ public class LightPulseOnEvent : MonoBehaviour
 
     void Pulse()
     {
-        Debug.Log("Pulse");
         // Then pulse
         _tween?.Kill();
         _tween = GetComponent<Light>().DOIntensity(_initialIntensity, _pulseDuration)
