@@ -11,7 +11,7 @@ public class DefaultBehaviour : MonoBehaviour {
     [SerializeField] private PhysicsModule _physicsModule = default;
     [SerializeField] private AnimationModule _animationModule = default;
     [SerializeField] private GripModule _gripModule = default;
-    [SerializeField] private CameraModule _cameraModule = default;
+    [SerializeField] private Camera _followCam = default;
 
     [Header("Movement")]
     [SerializeField] private bool _enableMovement = true;
@@ -28,23 +28,13 @@ public class DefaultBehaviour : MonoBehaviour {
         _input.onMove += _physicsModule.ManualTorqueInput;
         _input.onFloorChanged += ProcessFloorChanged;
 
-        _input.onLook += _cameraModule.Look;
-        _input.onScrollWheel += _cameraModule.ScrollWheel;
-
         _input.onLeftArm += _animationModule.UseLeftArm;
         _input.onLeftArm += _gripModule.UseLeftGrip;
         _input.onRightArm += _animationModule.UseRightArm;
         _input.onRightArm += _gripModule.UseRightGrip;
-    }
+    }    
 
     private void Update() {
-        _aimDirection = _cameraModule.Camera.transform.forward;
-        _animationModule.AimDirection = _aimDirection;
-
-        UpdateMovement();
-    }
-    
-    private void UpdateMovement() {
         if (_movement == Vector2.zero || !_enableMovement) {
             _animationModule.Animator.SetBool("moving", false);
             return;
@@ -53,8 +43,17 @@ public class DefaultBehaviour : MonoBehaviour {
         _animationModule.Animator.SetBool("moving", true);
         _animationModule.Animator.SetFloat("speed", _movement.magnitude);        
 
-        float angleOffset = Vector2.SignedAngle(_movement, Vector2.up);
-        Vector3 targetForward = Quaternion.AngleAxis(angleOffset, Vector3.up) * Auxiliary.GetFloorProjection(_aimDirection);
+        // Project camera vectors onto the ground plane, and then normalize them for our move direction!
+        var worldForward = Vector3.ProjectOnPlane(_followCam.transform.forward, Vector3.up).normalized;
+        var worldRight = Vector3.ProjectOnPlane(_followCam.transform.right, Vector3.up).normalized;
+        var movementForward = _movement.y * worldForward;
+        var movementRight = _movement.x * worldRight;
+        var targetForward = (movementForward + movementRight).normalized;
+
+
+        // TODO(make the grab point towards mouse position!!)
+        _aimDirection = targetForward;
+        _animationModule.AimDirection = targetForward;
         _physicsModule.TargetDirection = targetForward;
     }
 
@@ -78,5 +77,5 @@ public class DefaultBehaviour : MonoBehaviour {
     }
 
     /// <summary> Make the player move and rotate </summary>
-    private void MovementInput(Vector2 movement) => _movement = movement;
+    private void MovementInput(Vector2 movement) => _movement = movement; 
 }

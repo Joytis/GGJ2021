@@ -65,7 +65,7 @@ namespace ActiveRagdoll {
             onFloor = onFloor && Vector3.Angle(info.normal, Vector3.up) <= maxFloorSlope;
 
             if (onFloor && info.collider.gameObject.TryGetComponent<Floor>(out Floor floor))
-                    onFloor = floor.isFloor;
+                onFloor = floor.isFloor;
 
             normal = info.normal;
             return onFloor;

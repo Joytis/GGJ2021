@@ -108,12 +108,5 @@ namespace ActiveRagdoll
                 Camera.transform.LookAt(_smoothedLookPoint);
             }
         }
-
-        public void Look(Vector2 value) => _inputDelta = value;
-        public void ScrollWheel(Vector2 value)
-        {
-            _currentDistance = Mathf.Clamp(_currentDistance + value.y / 1200 * - scrollSensitivity,
-                                    minDistance, maxDistance);
-        }
     }
 } // namespace ActiveRagdoll
