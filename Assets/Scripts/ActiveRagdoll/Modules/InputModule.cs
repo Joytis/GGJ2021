@@ -25,6 +25,7 @@ namespace ActiveRagdoll {
 
         Rigidbody _rightFoot = default;
         Rigidbody _leftFoot = default;
+        bool _inputEnabled = true;
 
         void OnMove(InputValue value) => onMove?.Invoke(value.Get<Vector2>());
         void OnAim(InputValue value) => onAim?.Invoke(value.Get<Vector2>());
