@@ -10,8 +10,7 @@ namespace ActiveRagdoll {
     /// detecting if it's on floor). </summary>
     public class InputModule : Module {
         public event Action<Vector2> onMove;
-        public event Action<Vector2> onLook;
-        public event Action<Vector2> onScrollWheel;
+        public event Action<Vector2> onAim;
         public event Action<float> onLeftArm;
         public event Action<float> onRightArm;
         public event Action<bool> onFloorChanged;
@@ -28,10 +27,9 @@ namespace ActiveRagdoll {
         Rigidbody _leftFoot = default;
 
         void OnMove(InputValue value) => onMove?.Invoke(value.Get<Vector2>());
+        void OnAim(InputValue value) => onAim?.Invoke(value.Get<Vector2>());
         void OnLeftArm(InputValue value) => onLeftArm?.Invoke(value.Get<float>());
         void OnRightArm(InputValue value) => onRightArm?.Invoke(value.Get<float>());
-        void OnLook(InputValue value) => onLook?.Invoke(value.Get<Vector2>());
-        void OnScrllWheel(InputValue value) => onRightArm?.Invoke(value.Get<float>());
 
         void Start() 
         {

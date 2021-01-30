@@ -17,15 +17,15 @@ public class DefaultBehaviour : MonoBehaviour {
     [SerializeField] private bool _enableMovement = true;
     
     private Vector2 _movement = default;
-    private Vector3 _aimDirection = default;
+    private Vector2 _aimPoint = default;
+
+    private void MovementInput(Vector2 movement) => _movement = movement; 
+    private void AimInput(Vector2 movement) => _aimPoint = movement; 
 
     private void Start() {
-        // Link all the functions to its input to define how the ActiveRagdoll will behave.
-        // This is a default implementation, where the input player is binded directly to
-        // the ActiveRagdoll actions in a very simple way. But any implementation is
-        // possible, such as assigning those same actions to the output of an AI system.
         _input.onMove += MovementInput;
         _input.onMove += _physicsModule.ManualTorqueInput;
+        _input.onAim += AimInput;
         _input.onFloorChanged += ProcessFloorChanged;
 
         _input.onLeftArm += _animationModule.UseLeftArm;
@@ -35,14 +35,6 @@ public class DefaultBehaviour : MonoBehaviour {
     }    
 
     private void Update() {
-        if (_movement == Vector2.zero || !_enableMovement) {
-            _animationModule.Animator.SetBool("moving", false);
-            return;
-        }
-
-        _animationModule.Animator.SetBool("moving", true);
-        _animationModule.Animator.SetFloat("speed", _movement.magnitude);        
-
         // Project camera vectors onto the ground plane, and then normalize them for our move direction!
         var worldForward = Vector3.ProjectOnPlane(_followCam.transform.forward, Vector3.up).normalized;
         var worldRight = Vector3.ProjectOnPlane(_followCam.transform.right, Vector3.up).normalized;
@@ -50,11 +42,23 @@ public class DefaultBehaviour : MonoBehaviour {
         var movementRight = _movement.x * worldRight;
         var targetForward = (movementForward + movementRight).normalized;
 
+        // TARGET AIMING
+        var screenRay = _followCam.ScreenPointToRay(_aimPoint);
+        var wasHit = Physics.Raycast(screenRay, out var hit);
+        _animationModule.AimDirection = wasHit ? hit.point : targetForward;
 
-        // TODO(make the grab point towards mouse position!!)
-        _aimDirection = targetForward;
-        _animationModule.AimDirection = targetForward;
-        _physicsModule.TargetDirection = targetForward;
+        // MOVEMENT
+        if (_movement != Vector2.zero & _enableMovement) {
+            _animationModule.Animator.SetBool("moving", true);
+            _animationModule.Animator.SetFloat("speed", _movement.magnitude);        
+
+            // TODO(make the grab point towards mouse position!!)
+            _physicsModule.TargetDirection = targetForward;
+        }
+        else
+        {
+            _animationModule.Animator.SetBool("moving", false);
+        }
     }
 
     private void ProcessFloorChanged(bool onFloor) {
@@ -76,6 +80,4 @@ public class DefaultBehaviour : MonoBehaviour {
         }
     }
 
-    /// <summary> Make the player move and rotate </summary>
-    private void MovementInput(Vector2 movement) => _movement = movement; 
 }
