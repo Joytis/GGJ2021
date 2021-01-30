@@ -27,7 +27,7 @@ public class LightPulseOnEvent : MonoBehaviour
     {
         // Then pulse
         _tween?.Kill();
-        _tween = GetComponent<Light>().DOIntensity(_initialIntensity, _pulseDuration)
+        _tween = GetComponent<Light>().DOIntensity(_initialIntensity, _pulseDuration)!
             .From(0f)
             .SetEase(_curve);
     }

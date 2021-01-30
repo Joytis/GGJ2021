@@ -89,48 +89,48 @@ namespace ActiveRagdoll {
             }
         }
 
-        private void OnAnimatorIK(int layerIndex) {
-            // Look
-            _animator.SetLookAtWeight(LookIKWeight, ((LeftArmIKWeight + RightArmIKWeight) / 2) * ChestMaxLookWeight, 1, 1, 0);
+        // private void OnAnimatorIK(int layerIndex) {
+        //     // Look
+        //     _animator.SetLookAtWeight(LookIKWeight, ((LeftArmIKWeight + RightArmIKWeight) / 2) * ChestMaxLookWeight, 1, 1, 0);
 
-            Vector3 lookPos = Vector3.zero;
-            if (CurrentLookMode == LookMode.TARGET) lookPos = LookTarget.position;
-            if (CurrentLookMode == LookMode.POINT) lookPos = LookPoint;
+        //     Vector3 lookPos = Vector3.zero;
+        //     if (CurrentLookMode == LookMode.TARGET) lookPos = LookTarget.position;
+        //     if (CurrentLookMode == LookMode.POINT) lookPos = LookPoint;
 
-            _animator.SetLookAtPosition(lookPos);
+        //     _animator.SetLookAtPosition(lookPos);
 
-            // Left arm
-            _animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, _currentLeftArmIKWeight);
-            _animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, _currentLeftArmIKWeight);
-            _animator.SetIKHintPositionWeight(AvatarIKHint.LeftElbow, LeftArmIKWeight);
+        //     // Left arm
+        //     _animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, _currentLeftArmIKWeight);
+        //     _animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, _currentLeftArmIKWeight);
+        //     _animator.SetIKHintPositionWeight(AvatarIKHint.LeftElbow, LeftArmIKWeight);
 
-            _animator.SetIKPosition(AvatarIKGoal.LeftHand, LeftHandTarget.position);
-            _animator.SetIKRotation(AvatarIKGoal.LeftHand, LeftHandTarget.rotation);
-            _animator.SetIKHintPosition(AvatarIKHint.LeftElbow, LeftHandHint.position);
+        //     _animator.SetIKPosition(AvatarIKGoal.LeftHand, LeftHandTarget.position);
+        //     _animator.SetIKRotation(AvatarIKGoal.LeftHand, LeftHandTarget.rotation);
+        //     _animator.SetIKHintPosition(AvatarIKHint.LeftElbow, LeftHandHint.position);
 
-            // Right arm
-            _animator.SetIKPositionWeight(AvatarIKGoal.RightHand, _currentRightArmIKWeight);
-            _animator.SetIKRotationWeight(AvatarIKGoal.RightHand, _currentRightArmIKWeight);
-            _animator.SetIKHintPositionWeight(AvatarIKHint.RightElbow, RightArmIKWeight);
+        //     // Right arm
+        //     _animator.SetIKPositionWeight(AvatarIKGoal.RightHand, _currentRightArmIKWeight);
+        //     _animator.SetIKRotationWeight(AvatarIKGoal.RightHand, _currentRightArmIKWeight);
+        //     _animator.SetIKHintPositionWeight(AvatarIKHint.RightElbow, RightArmIKWeight);
 
-            _animator.SetIKPosition(AvatarIKGoal.RightHand, RightHandTarget.position);
-            _animator.SetIKRotation(AvatarIKGoal.RightHand, RightHandTarget.rotation);
-            _animator.SetIKHintPosition(AvatarIKHint.RightElbow, RightHandHint.position);
+        //     _animator.SetIKPosition(AvatarIKGoal.RightHand, RightHandTarget.position);
+        //     _animator.SetIKRotation(AvatarIKGoal.RightHand, RightHandTarget.rotation);
+        //     _animator.SetIKHintPosition(AvatarIKHint.RightElbow, RightHandHint.position);
             
-            // Left leg
-            _animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, _currentLeftLegIKWeight);
-            _animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, _currentLeftLegIKWeight);
+        //     // Left leg
+        //     _animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, _currentLeftLegIKWeight);
+        //     _animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, _currentLeftLegIKWeight);
 
-            _animator.SetIKPosition(AvatarIKGoal.LeftFoot, LeftFootTarget.position);
-            _animator.SetIKRotation(AvatarIKGoal.LeftFoot, LeftFootTarget.rotation);
+        //     _animator.SetIKPosition(AvatarIKGoal.LeftFoot, LeftFootTarget.position);
+        //     _animator.SetIKRotation(AvatarIKGoal.LeftFoot, LeftFootTarget.rotation);
 
-            // Right leg
-            _animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, _currentRightLegIKWeight);
-            _animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, _currentRightLegIKWeight);
+        //     // Right leg
+        //     _animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, _currentRightLegIKWeight);
+        //     _animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, _currentRightLegIKWeight);
 
-            _animator.SetIKPosition(AvatarIKGoal.RightFoot, RightFootTarget.position);
-            _animator.SetIKRotation(AvatarIKGoal.RightFoot, RightFootTarget.rotation);
-        }
+        //     _animator.SetIKPosition(AvatarIKGoal.RightFoot, RightFootTarget.position);
+        //     _animator.SetIKRotation(AvatarIKGoal.RightFoot, RightFootTarget.rotation);
+        // }
 
         public void LookAtTarget(Transform target) {
             LookTarget = target;

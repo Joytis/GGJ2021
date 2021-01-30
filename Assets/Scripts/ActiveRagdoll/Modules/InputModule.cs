@@ -27,10 +27,25 @@ namespace ActiveRagdoll {
         Rigidbody _leftFoot = default;
         bool _inputEnabled = true;
 
+        public bool RightArm { get; private set; }
+        public bool LeftArm { get; private set; }
+
         void OnMove(InputValue value) => onMove?.Invoke(value.Get<Vector2>());
         void OnAim(InputValue value) => onAim?.Invoke(value.Get<Vector2>());
-        void OnLeftArm(InputValue value) => onLeftArm?.Invoke(value.Get<float>());
-        void OnRightArm(InputValue value) => onRightArm?.Invoke(value.Get<float>());
+
+        void OnLeftArm(InputValue value) 
+        {
+            var floatValue = value.Get<float>();
+            LeftArm = !Mathf.Approximately(floatValue, 0f); 
+            onLeftArm?.Invoke(floatValue);
+        }
+        
+        void OnRightArm(InputValue value) 
+        {
+            var floatValue = value.Get<float>();
+            RightArm = !Mathf.Approximately(floatValue, 0f); 
+            onRightArm?.Invoke(floatValue);
+        }
 
         void Start() 
         {

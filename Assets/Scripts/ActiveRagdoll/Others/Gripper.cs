@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace ActiveRagdoll {
     // Author: Sergio Abreu García | https://sergioabreu.me
@@ -13,8 +11,9 @@ namespace ActiveRagdoll {
         /// skipping it. </summary>
         private Rigidbody _lastCollision;
 
-        private ConfigurableJoint _joint;
-        private Grippable _gripped;
+        private ConfigurableJoint _joint = default;
+        private Grippable _gripped = default;
+        private Rigidbody _lastGripped = default;
         
         public void Start() {
             // Start disabled is useful to avoid fake gripping something at the start
@@ -40,10 +39,18 @@ namespace ActiveRagdoll {
             _joint.yMotion = ConfigurableJointMotion.Locked;
             _joint.zMotion = ConfigurableJointMotion.Locked;
 
+            _lastGripped = whatToGrip;
             if (whatToGrip.TryGetComponent(out _gripped))
                 _gripped.jointMotionsConfig.ApplyTo(ref _joint);
             else
                 GripMod.defaultMotionsConfig.ApplyTo(ref _joint);
+
+            // Check for friend gripping
+            var component = _lastGripped.GetComponentInParent<IGrippable>();
+            if(component != null)
+            {
+                component.Grip();
+            }
         }
 
         private void UnGrip() {
@@ -52,6 +59,15 @@ namespace ActiveRagdoll {
 
             Destroy(_joint);
             _joint = null;
+
+            if(_lastGripped != null)
+            {
+                var component = _lastGripped.GetComponentInParent<IGrippable>();
+                if(component != null)
+                {
+                    component.Ungrip();
+                }
+            }
             _gripped = null;
         }
 

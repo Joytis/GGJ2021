@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Animations.Rigging;
 using ActiveRagdoll;
 
 /// <summary> Default behaviour of an Active Ragdoll </summary>
@@ -11,13 +12,20 @@ public class DefaultBehaviour : MonoBehaviour {
     [SerializeField] private PhysicsModule _physicsModule = default;
     [SerializeField] private AnimationModule _animationModule = default;
     [SerializeField] private GripModule _gripModule = default;
+    [SerializeField] private LayerMask _raycastMask = default;
     [SerializeField] private Camera _followCam = default;
+
+    [SerializeField] private Rig _leftArmRig = default;
+    [SerializeField] private Rig _rightArmRig = default;
+    [SerializeField] private Transform _leftArmIk = default;
+    [SerializeField] private Transform _rightArmIk = default;
 
     [Header("Movement")]
     [SerializeField] private bool _enableMovement = true;
     
     private Vector2 _movement = default;
     private Vector2 _aimPoint = default;
+    private Vector3 _lastPoint = default;
 
     private void MovementInput(Vector2 movement) => _movement = movement; 
     private void AimInput(Vector2 movement) => _aimPoint = movement; 
@@ -34,21 +42,32 @@ public class DefaultBehaviour : MonoBehaviour {
         _input.onRightArm += _gripModule.UseRightGrip;
     }    
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(_lastPoint, 1f);
+    }
+
     private void Update() {
         // Project camera vectors onto the ground plane, and then normalize them for our move direction!
-        var worldForward = Vector3.ProjectOnPlane(_followCam.transform.forward, Vector3.up).normalized;
-        var worldRight = Vector3.ProjectOnPlane(_followCam.transform.right, Vector3.up).normalized;
+        var worldForward = Auxiliary.GetFloorProjection(_followCam.transform.forward);
+        var worldRight = Auxiliary.GetFloorProjection(_followCam.transform.right);
         var movementForward = _movement.y * worldForward;
         var movementRight = _movement.x * worldRight;
         var targetForward = (movementForward + movementRight).normalized;
 
         // TARGET AIMING
         var screenRay = _followCam.ScreenPointToRay(_aimPoint);
-        var wasHit = Physics.Raycast(screenRay, out var hit);
-        _animationModule.AimDirection = wasHit ? hit.point : targetForward;
+        var wasHit = Physics.Raycast(screenRay, out var hit, Mathf.Infinity, _raycastMask);
+        var ikTarget = wasHit ? hit.point : transform.position;
+
+        _leftArmRig.weight = _input.LeftArm ? 1f : 0f;
+        _rightArmRig.weight = _input.RightArm ? 1f : 0f;
+        _leftArmIk.position = ikTarget;
+        _rightArmIk.position = ikTarget;
 
         // MOVEMENT
-        if (_movement != Vector2.zero & _enableMovement) {
+        if (_movement != Vector2.zero && _enableMovement) {
             _animationModule.Animator.SetBool("moving", true);
             _animationModule.Animator.SetFloat("speed", _movement.magnitude);        
 

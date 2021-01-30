@@ -14,9 +14,10 @@ public class BoyfriendBehaviour : MonoBehaviour {
     [Header("Movement")]
     [SerializeField] private bool _enableMovement = true;
     [SerializeField] private float _playerRadiusSense = 10f;
+    [SerializeField] private float _movementScalar = 10f;
     
-    private Vector2 _movement = default;
-    private Vector2 _aimPoint = default;
+    private Vector3 _movement = default;
+    private Vector3 _aimPoint = default;
 
     void OnDrawGizmos()
     {
@@ -26,21 +27,21 @@ public class BoyfriendBehaviour : MonoBehaviour {
 
     private void Update() 
     {
-        var playerInRadius = Vector3.Distance(_follow.position, transform.position) < _playerRadiusSense;
-        var playerDirection = (_follow.position - transform.position).normalized;
-        _movement = playerInRadius ? new Vector2(playerDirection.x, playerDirection.z) : Vector2.zero;
-        _movement.Normalize();
-        _aimPoint = _movement;
-
+        var playerInRadius = Vector3.Distance(_follow.position, _activeRagdoll.PhysicalTorso.position) < _playerRadiusSense;
+        var playerDirection = (_follow.position - _activeRagdoll.PhysicalTorso.position).normalized;
+        Vector3 floorDirection = Auxiliary.GetFloorProjection(playerDirection);
+        _movement = playerInRadius ? floorDirection.normalized : Vector3.zero;
         _animationModule.AimDirection = _movement;
 
+        Debug.DrawRay(_activeRagdoll.PhysicalTorso.position, floorDirection * 3, Color.red);
+
         // MOVEMENT
-        if (_movement != Vector2.zero & _enableMovement) {
+        if (_movement != Vector3.zero && _enableMovement) {
             _animationModule.Animator.SetBool("moving", true);
             _animationModule.Animator.SetFloat("speed", _movement.magnitude);        
 
             // TODO(make the grab point towards mouse position!!)
-            _physicsModule.TargetDirection = _movement;
+            _physicsModule.TargetDirection = _movement * _movementScalar;
         }
         else
         {

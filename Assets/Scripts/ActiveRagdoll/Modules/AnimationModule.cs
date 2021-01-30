@@ -14,6 +14,9 @@ namespace ActiveRagdoll {
         private AnimatorHelper _animatorHelper;
         public Animator Animator { get; private set; }
 
+        [Header("Animation")]
+        public float _animationSpeed = 1f;
+
         [Header("INVERSE KINEMATICS")]
         public bool _enableIK = true;
 
@@ -56,6 +59,7 @@ namespace ActiveRagdoll {
             _animatedBones = _activeRagdoll.AnimatedBones;
             _animatorHelper = _activeRagdoll.AnimatorHelper;
             Animator = _activeRagdoll.AnimatedAnimator;
+            Animator.speed = _animationSpeed;
 
             _initialJointsRotation = new Quaternion[_joints.Length];
             for (int i = 0; i < _joints.Length; i++) {
@@ -84,7 +88,7 @@ namespace ActiveRagdoll {
             }
             _animatorHelper.LookIKWeight = 1;
 
-            AimDirection = AimDirection;
+            // AimDirection = AimDirection;
             _animTorso = _activeRagdoll.AnimatedTorso;
             _chest = _activeRagdoll.GetAnimatedBone(HumanBodyBones.Spine);
             ReflectBackwards();
@@ -92,7 +96,7 @@ namespace ActiveRagdoll {
             CalculateVerticalPercent();
 
             UpdateLookIK();
-            UpdateArmsIK();
+            // UpdateArmsIK();
         }
 
         /// <summary> Reflect the direction when looking backwards, avoids neck-breaking twists </summary>
@@ -119,28 +123,28 @@ namespace ActiveRagdoll {
             _animatorHelper.LookAtPoint(lookPoint);
         }
 
-        private void UpdateArmsIK() {
-            float armsVerticalAngle = _targetDirVerticalPercent * Mathf.Abs(maxArmsAngle - minArmsAngle) + minArmsAngle;
-            armsVerticalAngle += armsAngleOffset;
-            _armsDir = Quaternion.AngleAxis(-armsVerticalAngle, _animTorso.right) * _targetDir2D;
+        // private void UpdateArmsIK() {
+        //     float armsVerticalAngle = _targetDirVerticalPercent * Mathf.Abs(maxArmsAngle - minArmsAngle) + minArmsAngle;
+        //     armsVerticalAngle += armsAngleOffset;
+        //     _armsDir = Quaternion.AngleAxis(-armsVerticalAngle, _animTorso.right) * _targetDir2D;
 
-            float currentArmsDistance = armsDistance.Evaluate(_targetDirVerticalPercent);
+        //     float currentArmsDistance = armsDistance.Evaluate(_targetDirVerticalPercent);
 
-            Vector3 armsMiddleTarget = _chest.position + _armsDir * currentArmsDistance;
-            Vector3 upRef = Vector3.Cross(_armsDir, _animTorso.right).normalized;
-            Vector3 armsHorizontalVec = Vector3.Cross(_armsDir, upRef).normalized;
-            Quaternion handsRot = _armsDir != Vector3.zero? Quaternion.LookRotation(_armsDir, upRef)
-                                                            : Quaternion.identity;
+        //     Vector3 armsMiddleTarget = _chest.position + _armsDir * currentArmsDistance;
+        //     Vector3 upRef = Vector3.Cross(_armsDir, _animTorso.right).normalized;
+        //     Vector3 armsHorizontalVec = Vector3.Cross(_armsDir, upRef).normalized;
+        //     Quaternion handsRot = _armsDir != Vector3.zero? Quaternion.LookRotation(_armsDir, upRef)
+        //                                                     : Quaternion.identity;
 
-            _animatorHelper.LeftHandTarget.position = armsMiddleTarget + armsHorizontalVec * armsHorizontalSeparation / 2;
-            _animatorHelper.RightHandTarget.position = armsMiddleTarget - armsHorizontalVec * armsHorizontalSeparation / 2;
-            _animatorHelper.LeftHandTarget.rotation = handsRot * Quaternion.Euler(0, 0, 90 - handsRotationOffset);
-            _animatorHelper.RightHandTarget.rotation = handsRot * Quaternion.Euler(0, 0, -90 + handsRotationOffset);
+        //     _animatorHelper.LeftHandTarget.position = armsMiddleTarget + armsHorizontalVec * armsHorizontalSeparation / 2;
+        //     _animatorHelper.RightHandTarget.position = armsMiddleTarget - armsHorizontalVec * armsHorizontalSeparation / 2;
+        //     _animatorHelper.LeftHandTarget.rotation = handsRot * Quaternion.Euler(0, 0, 90 - handsRotationOffset);
+        //     _animatorHelper.RightHandTarget.rotation = handsRot * Quaternion.Euler(0, 0, -90 + handsRotationOffset);
 
-            var armsUpVec = Vector3.Cross(_armsDir, _animTorso.right).normalized;
-            _animatorHelper.LeftHandHint.position = armsMiddleTarget + armsHorizontalVec * armsHorizontalSeparation - armsUpVec;
-            _animatorHelper.RightHandHint.position = armsMiddleTarget - armsHorizontalVec * armsHorizontalSeparation - armsUpVec;
-        }
+        //     var armsUpVec = Vector3.Cross(_armsDir, _animTorso.right).normalized;
+        //     _animatorHelper.LeftHandHint.position = armsMiddleTarget + armsHorizontalVec * armsHorizontalSeparation - armsUpVec;
+        //     _animatorHelper.RightHandHint.position = armsMiddleTarget - armsHorizontalVec * armsHorizontalSeparation - armsUpVec;
+        // }
 
         /// <summary> Plays an animation using the animator. The speed doesn't change the actual
         /// speed of the animator, but a parameter of the same name that can be used to multiply
