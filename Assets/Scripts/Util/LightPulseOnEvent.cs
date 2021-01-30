@@ -19,6 +19,7 @@ public class LightPulseOnEvent : MonoBehaviour
         _light = GetComponent<Light>();
         _initialIntensity = _light.intensity;
     }
+    
     void OnEnable() => _channel.AddListener(Pulse);
     void OnDisable() => _channel.RemoveListener(Pulse);
 
