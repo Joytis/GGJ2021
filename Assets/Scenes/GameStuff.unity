@@ -14479,6 +14479,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1201445a722ab8a4c8676c9357bc3642, type: 3}
+--- !u!1 &979094770 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1201445a722ab8a4c8676c9357bc3642, type: 3}
+  m_PrefabInstance: {fileID: 979094769}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &979094771
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 979094770}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3947943226742534253, guid: 1201445a722ab8a4c8676c9357bc3642, type: 3}
 --- !u!1001 &984572865
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17301,8 +17320,8 @@ Transform:
   - {fileID: 442499578}
   - {fileID: 1590109350}
   - {fileID: 1853169072}
-  - {fileID: 436334704}
   - {fileID: 2056540620}
+  - {fileID: 436334704}
   - {fileID: 1521423386}
   m_Father: {fileID: 257936079}
   m_RootOrder: 0
@@ -27565,6 +27584,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1201445a722ab8a4c8676c9357bc3642, type: 3}
+--- !u!1 &1788158607 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1201445a722ab8a4c8676c9357bc3642, type: 3}
+  m_PrefabInstance: {fileID: 1788158606}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1788158608
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788158607}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3947943226742534253, guid: 1201445a722ab8a4c8676c9357bc3642, type: 3}
 --- !u!1 &1788645048
 GameObject:
   m_ObjectHideFlags: 0
@@ -31146,7 +31184,7 @@ Transform:
   m_Children:
   - {fileID: 407479692}
   m_Father: {fileID: 1233071851}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &2056540621
 Rigidbody:
