@@ -16,6 +16,19 @@ namespace ActiveRagdoll
 
         private Gripper _leftGrip, _rightGrip;
 
+        [SerializeField] AudioClip _soundOnGrip = default;
+        [SerializeField] Vector2 _gripPitchRange = Vector2.one;
+        [SerializeField] float _gripVolume = 1f;
+        public AudioClip SoundOnGrip => _soundOnGrip;
+        public Vector2 GripPitchRange => _gripPitchRange;
+        public float GripVolume => _gripVolume;
+
+        [SerializeField] AudioClip _soundOnUngrip = default;
+        [SerializeField] Vector2 _ungripPitchRange = Vector2.one;
+        [SerializeField] float _ungripVolume = 1f;
+        public AudioClip SoundOnUngrip => _soundOnUngrip;
+        public Vector2 UngripPitchRange => _ungripPitchRange;
+        public float UngripVolume => _ungripVolume;
 
         private void Start() {
             var leftHand = _activeRagdoll.GetPhysicalBone(HumanBodyBones.LeftHand).gameObject;

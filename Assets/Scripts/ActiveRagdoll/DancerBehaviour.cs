@@ -18,7 +18,6 @@ public class DancerBehaviour : MonoBehaviour, IGrippable {
     [SerializeField] private ActiveRagdoll.ActiveRagdoll _activeRagdoll = default;
     [SerializeField] private PhysicsModule _physicsModule = default;
     [SerializeField] private AnimationModule _animationModule = default;
-    [SerializeField] private GripModule _gripModule = default;    
 
     private Vector2 _movement = default;
     private Vector2 _aimPoint = default;

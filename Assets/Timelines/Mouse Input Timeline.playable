@@ -957,11 +957,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f10dd60657c6004587f237a7e90f8e4, type: 3}
   m_Name: AudioPlayableAsset(Clone)(Clone)
   m_EditorClassIdentifier: 
-  m_Clip: {fileID: 8300000, guid: 3859f66b6266fad4e8f1504193c4abdb, type: 3}
+  m_Clip: {fileID: 8300000, guid: f09160ec8b63b474e957e74ef6bb72d0, type: 3}
   m_Loop: 0
   m_bufferingTime: 0.1
   m_ClipProperties:
-    volume: 1
+    volume: 0.5
 --- !u!114 &3306022889348465621
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -974,11 +974,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f10dd60657c6004587f237a7e90f8e4, type: 3}
   m_Name: AudioPlayableAsset
   m_EditorClassIdentifier: 
-  m_Clip: {fileID: 8300000, guid: 3859f66b6266fad4e8f1504193c4abdb, type: 3}
+  m_Clip: {fileID: 8300000, guid: f09160ec8b63b474e957e74ef6bb72d0, type: 3}
   m_Loop: 0
   m_bufferingTime: 0.1
   m_ClipProperties:
-    volume: 1
+    volume: 0.5
 --- !u!114 &3617120527072559946
 MonoBehaviour:
   m_ObjectHideFlags: 1

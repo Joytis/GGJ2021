@@ -14,11 +14,15 @@ namespace ActiveRagdoll {
         private ConfigurableJoint _joint = default;
         private Grippable _gripped = default;
         private Rigidbody _lastGripped = default;
+        private AudioSource _source = default;
         
         public void Start() {
             // Start disabled is useful to avoid fake gripping something at the start
+            _source = gameObject.AddComponent<AudioSource>();
             enabled = false;
         }
+
+
 
         private void Grip(Rigidbody whatToGrip) {
             if (!enabled) {
@@ -51,6 +55,12 @@ namespace ActiveRagdoll {
             {
                 component.Grip();
             }
+
+            // PLay grip sound
+            _source.clip = GripMod.SoundOnGrip;
+            _source.pitch = Random.Range(GripMod.GripPitchRange.x, GripMod.GripPitchRange.y);
+            _source.volume = GripMod.GripVolume;
+            _source.Play();
         }
 
         private void UnGrip() {
@@ -69,6 +79,12 @@ namespace ActiveRagdoll {
                 }
             }
             _gripped = null;
+
+            // PLay Ungrip sound
+            _source.clip = GripMod.SoundOnUngrip;
+            _source.pitch = Random.Range(GripMod.UngripPitchRange.x, GripMod.UngripPitchRange.y);
+            _source.volume = GripMod.UngripVolume;
+            _source.Play();
         }
 
 
