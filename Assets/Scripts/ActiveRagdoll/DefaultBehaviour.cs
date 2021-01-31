@@ -41,13 +41,7 @@ public class DefaultBehaviour : MonoBehaviour {
         _input.onRightArm += _animationModule.UseRightArm;
         _input.onRightArm += _gripModule.UseRightGrip;
     }    
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(_lastPoint, 1f);
-    }
-
+    
     private void Update() {
         // Project camera vectors onto the ground plane, and then normalize them for our move direction!
         var worldForward = Auxiliary.GetFloorProjection(_followCam.transform.forward);
