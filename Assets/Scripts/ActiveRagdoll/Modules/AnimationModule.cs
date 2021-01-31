@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace ActiveRagdoll {
     // Author: Sergio Abreu García | https://sergioabreu.me
@@ -16,6 +14,7 @@ namespace ActiveRagdoll {
 
         [Header("Animation")]
         public float _animationSpeed = 1f;
+        public float _speedDelta = 0f;
 
         [Header("INVERSE KINEMATICS")]
         public bool _enableIK = true;
@@ -52,14 +51,16 @@ namespace ActiveRagdoll {
         private Transform _animTorso, _chest;
         private float _targetDirVerticalPercent;
 
-
+        void Awake()
+        {
+            Animator = _activeRagdoll.AnimatedAnimator;
+            Animator.speed = _animationSpeed + UnityEngine.Random.Range(-_speedDelta, _speedDelta);
+        }
 
         private void Start() {
             _joints = _activeRagdoll.Joints;
             _animatedBones = _activeRagdoll.AnimatedBones;
             _animatorHelper = _activeRagdoll.AnimatorHelper;
-            Animator = _activeRagdoll.AnimatedAnimator;
-            Animator.speed = _animationSpeed;
 
             _initialJointsRotation = new Quaternion[_joints.Length];
             for (int i = 0; i < _joints.Length; i++) {
@@ -123,35 +124,12 @@ namespace ActiveRagdoll {
             _animatorHelper.LookAtPoint(lookPoint);
         }
 
-        // private void UpdateArmsIK() {
-        //     float armsVerticalAngle = _targetDirVerticalPercent * Mathf.Abs(maxArmsAngle - minArmsAngle) + minArmsAngle;
-        //     armsVerticalAngle += armsAngleOffset;
-        //     _armsDir = Quaternion.AngleAxis(-armsVerticalAngle, _animTorso.right) * _targetDir2D;
-
-        //     float currentArmsDistance = armsDistance.Evaluate(_targetDirVerticalPercent);
-
-        //     Vector3 armsMiddleTarget = _chest.position + _armsDir * currentArmsDistance;
-        //     Vector3 upRef = Vector3.Cross(_armsDir, _animTorso.right).normalized;
-        //     Vector3 armsHorizontalVec = Vector3.Cross(_armsDir, upRef).normalized;
-        //     Quaternion handsRot = _armsDir != Vector3.zero? Quaternion.LookRotation(_armsDir, upRef)
-        //                                                     : Quaternion.identity;
-
-        //     _animatorHelper.LeftHandTarget.position = armsMiddleTarget + armsHorizontalVec * armsHorizontalSeparation / 2;
-        //     _animatorHelper.RightHandTarget.position = armsMiddleTarget - armsHorizontalVec * armsHorizontalSeparation / 2;
-        //     _animatorHelper.LeftHandTarget.rotation = handsRot * Quaternion.Euler(0, 0, 90 - handsRotationOffset);
-        //     _animatorHelper.RightHandTarget.rotation = handsRot * Quaternion.Euler(0, 0, -90 + handsRotationOffset);
-
-        //     var armsUpVec = Vector3.Cross(_armsDir, _animTorso.right).normalized;
-        //     _animatorHelper.LeftHandHint.position = armsMiddleTarget + armsHorizontalVec * armsHorizontalSeparation - armsUpVec;
-        //     _animatorHelper.RightHandHint.position = armsMiddleTarget - armsHorizontalVec * armsHorizontalSeparation - armsUpVec;
-        // }
-
         /// <summary> Plays an animation using the animator. The speed doesn't change the actual
         /// speed of the animator, but a parameter of the same name that can be used to multiply
         /// the speed of certain animations. </summary>
         /// <param name="animation">The name of the animation state to be played</param>
         /// <param name="speed">The speed to be set</param>
-        public void PlayAnimation(string animation, float speed = 1) {
+        public void PlayAnimation(string animation, float speed = 1, float time = 0f) {
             Animator.Play(animation);
             Animator.SetFloat("speed", speed);
         }
