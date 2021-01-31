@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "GGJ/Simple Event Channel")]
-public class SimpleEventChannel<TValue> : ScriptableObject
+public abstract class GenericEventChannel<TValue> : ScriptableObject
 {
     HashSet<Action<TValue>> _subscribers = new HashSet<Action<TValue>>();
 

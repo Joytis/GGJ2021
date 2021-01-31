@@ -10407,7 +10407,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1272571897}
   m_Layer: 0
-  m_Name: ===Initializers===
+  m_Name: ===Systems===
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
