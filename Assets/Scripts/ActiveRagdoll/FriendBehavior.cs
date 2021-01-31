@@ -14,6 +14,11 @@ public class FriendBehavior : MonoBehaviour, IGrippable {
     private Vector2 _movement = default;
     private Vector2 _aimPoint = default;
 
+    void Start()
+    {
+        _physicsModule.TargetDirection = Auxiliary.GetFloorProjection(_activeRagdoll.PhysicalTorso.position).normalized;
+    }
+
     public void Grip()
     {
         _physicsModule.SetBalanceMode(PhysicsModule.BalanceMode.ManualTorque);

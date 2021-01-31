@@ -1,17 +1,13 @@
+using Cinemachine;
 using UnityEngine;
 
+[RequireComponent(typeof(CinemachineImpulseSource))]
 public class ShakeOnCollision : MonoBehaviour
 {
-    [SerializeField] CameraShakeChannel _channel = default;
-    [SerializeField] float _shakeMultiplier = default;
+    [SerializeField] CinemachineImpulseSource _source = default;
 
-    void OnCollisionEnter(Collision collision)
-    {
-        _channel.Raise(new CameraShakeArgs
-        {
-            Intensity = collision.relativeVelocity.magnitude * _shakeMultiplier,
-            Location = collision.GetContact(0).point,
-        });
-    }
+    void Awake() => _source = GetComponent<CinemachineImpulseSource>();
+
+    void OnCollisionEnter(Collision collision) => _source.GenerateImpulse(collision.relativeVelocity);
 }
 

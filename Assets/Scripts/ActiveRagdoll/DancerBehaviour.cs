@@ -8,6 +8,7 @@ public class DancerBehaviour : MonoBehaviour, IGrippable {
         ChickenDance,
         YMCA,
         Twist,
+        Sitting,
     }
 
     [Header("Config")]
@@ -44,6 +45,7 @@ public class DancerBehaviour : MonoBehaviour, IGrippable {
             case Dances.ChickenDance: return "ChickenDance";
             case Dances.YMCA: return "YMCA";
             case Dances.Twist: return "Twist";
+            case Dances.Sitting: return "Sitting";
         }
         throw new System.InvalidOperationException();
     }
