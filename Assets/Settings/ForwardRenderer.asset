@@ -117,6 +117,30 @@ MonoBehaviour:
       restoreCamera: 1
       offset: {x: 0, y: 0, z: 0, w: 0}
       cameraFieldOfView: 60
+--- !u!114 &-3007218833603716646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dea88b8bfbd93941b433ee338a4192d, type: 3}
+  m_Name: Posterize Blit
+  m_EditorClassIdentifier: 
+  m_Active: 0
+  settings:
+    Event: 500
+    blitMaterial: {fileID: 2100000, guid: 5fa8ff3dbb2e15a409d7995ae8f6cb60, type: 2}
+    blitMaterialPassIndex: 0
+    setInverseViewMatrix: 0
+    srcType: 0
+    srcTextureId: _CameraColorTexture
+    srcTextureObject: {fileID: 0}
+    dstType: 0
+    dstTextureId: _BlitPassTexture
+    dstTextureObject: {fileID: 0}
 --- !u!114 &-687240676249129597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,7 +222,8 @@ MonoBehaviour:
   - {fileID: -5132521316788853610}
   - {fileID: 7918567163818742928}
   - {fileID: -5640973892777048082}
-  m_RendererFeatureMap: cff016514e71f0fd83adf8003f6e76f61ee8411244c7a31e36350f95af6650c79624ae3e0e9fc5b890147d91e166e46dee87c5b5213cb7b1
+  - {fileID: -3007218833603716646}
+  m_RendererFeatureMap: cff016514e71f0fd83adf8003f6e76f61ee8411244c7a31e36350f95af6650c79624ae3e0e9fc5b890147d91e166e46dee87c5b5213cb7b1da992f5d673644d6
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
   shaders:
