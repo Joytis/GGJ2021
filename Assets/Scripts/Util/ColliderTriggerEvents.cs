@@ -7,6 +7,7 @@ public class ColliderTriggerEvents : MonoBehaviour
     [SerializeField] bool _triggerOnce = default;
     [SerializeField] LayerMask _mask = default;
     [SerializeField] UnityEvent _event = default;
+    [SerializeField] UnityEvent<Collider> _eventWithInfo = default;
     bool _happened = false;
 
     void OnTriggerEnter(Collider other)
@@ -18,6 +19,7 @@ public class ColliderTriggerEvents : MonoBehaviour
         if((_mask.value & (1 << other.gameObject.layer)) == 0) return;
 
         _event.Invoke();
+        _eventWithInfo.Invoke(other);
         _happened = true;
     }
 
