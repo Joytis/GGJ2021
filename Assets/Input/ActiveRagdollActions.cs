@@ -49,6 +49,14 @@ public class @ActiveRagdollActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Quit"",
+                    ""type"": ""Button"",
+                    ""id"": ""c1e2ecc8-b1a9-4ae8-b6d9-92b29270b00f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -236,6 +244,17 @@ public class @ActiveRagdollActions : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3f8287f4-ec69-4360-92cf-6f15b5424696"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Quit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -817,6 +836,7 @@ public class @ActiveRagdollActions : IInputActionCollection, IDisposable
         m_Player_LeftArm = m_Player.FindAction("LeftArm", throwIfNotFound: true);
         m_Player_RightArm = m_Player.FindAction("RightArm", throwIfNotFound: true);
         m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
+        m_Player_Quit = m_Player.FindAction("Quit", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -882,6 +902,7 @@ public class @ActiveRagdollActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_LeftArm;
     private readonly InputAction m_Player_RightArm;
     private readonly InputAction m_Player_Aim;
+    private readonly InputAction m_Player_Quit;
     public struct PlayerActions
     {
         private @ActiveRagdollActions m_Wrapper;
@@ -890,6 +911,7 @@ public class @ActiveRagdollActions : IInputActionCollection, IDisposable
         public InputAction @LeftArm => m_Wrapper.m_Player_LeftArm;
         public InputAction @RightArm => m_Wrapper.m_Player_RightArm;
         public InputAction @Aim => m_Wrapper.m_Player_Aim;
+        public InputAction @Quit => m_Wrapper.m_Player_Quit;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -911,6 +933,9 @@ public class @ActiveRagdollActions : IInputActionCollection, IDisposable
                 @Aim.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
                 @Aim.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
                 @Aim.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAim;
+                @Quit.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuit;
+                @Quit.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuit;
+                @Quit.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuit;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -927,6 +952,9 @@ public class @ActiveRagdollActions : IInputActionCollection, IDisposable
                 @Aim.started += instance.OnAim;
                 @Aim.performed += instance.OnAim;
                 @Aim.canceled += instance.OnAim;
+                @Quit.started += instance.OnQuit;
+                @Quit.performed += instance.OnQuit;
+                @Quit.canceled += instance.OnQuit;
             }
         }
     }
@@ -1087,6 +1115,7 @@ public class @ActiveRagdollActions : IInputActionCollection, IDisposable
         void OnLeftArm(InputAction.CallbackContext context);
         void OnRightArm(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
+        void OnQuit(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

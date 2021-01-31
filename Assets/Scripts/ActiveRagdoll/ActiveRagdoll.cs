@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace ActiveRagdoll {
     // Author: Sergio Abreu García | https://sergioabreu.me
@@ -50,16 +51,30 @@ namespace ActiveRagdoll {
         public BodyPart LeftLeg => _leftLeg;
         public BodyPart RightLeg => _rightLeg;
 
+        public event Action<Collision> onCollisionEnter;
+        public event Action<Collision> onCollisionExit;
+        public event Action<Collision> onCollisionStay;
+
         public AnimatorHelper AnimatorHelper { get; private set; }
         /// <summary> Whether to constantly set the rotation of the Animated Body to the Physical Body's.</summary>
         public bool SyncTorsoPositions { get; set; } = true;
         public bool SyncTorsoRotations { get; set; } = true;
+
+        public void ChildCollisionEnter(Collision collision) => onCollisionEnter?.Invoke(collision);
+        public void ChildCollisionExit(Collision collision) => onCollisionExit?.Invoke(collision);
+        public void ChildCollisionStay(Collision collision) => onCollisionStay?.Invoke(collision);
 
         private void Awake() {
             ID = _idCount++;
             AnimatedBones = _animatedTorso.GetComponentsInChildren<Transform>();
             Joints = _physicalTorso.GetComponentsInChildren<ConfigurableJoint>();
             Rigidbodies = _physicalTorso.GetComponentsInChildren<Rigidbody>();
+
+            foreach(var rb in Rigidbodies)
+            {
+                rb.gameObject.AddComponent<CollisionForwarder>().Initialize(this);
+
+            }
 
             foreach (Rigidbody rb in Rigidbodies) {
                 rb.solverIterations = _solverIterations;
