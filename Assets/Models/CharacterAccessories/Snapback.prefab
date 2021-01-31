@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1743128555911869192}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Snapback
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,19 +96,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7331300610966931455, guid: 96c994667b5d7c5489e4fe582a9f3801, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7235015103121818086, guid: 96c994667b5d7c5489e4fe582a9f3801, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -2615453208677245630, guid: 96c994667b5d7c5489e4fe582a9f3801, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8140499575222096, guid: 96c994667b5d7c5489e4fe582a9f3801, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 96c994667b5d7c5489e4fe582a9f3801, type: 3}
       propertyPath: m_Name
@@ -116,11 +116,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 96c994667b5d7c5489e4fe582a9f3801, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5973487635182637503, guid: 96c994667b5d7c5489e4fe582a9f3801, type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96c994667b5d7c5489e4fe582a9f3801, type: 3}

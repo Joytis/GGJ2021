@@ -49,6 +49,7 @@ public class GameStateManager : MonoBehaviour
     IEnumerator DoFriendExplosion(FriendMap friend)
     {
         yield return new WaitForSeconds(0.3f);
+        _gottemSound.Play();
 
         // Blow up friend and make some particles. 
         var friendTransform = friend.friend.gameObject.transform;
@@ -62,7 +63,6 @@ public class GameStateManager : MonoBehaviour
 
         // Shake the screen. Play a sound. Do some other stuff. 
         _impulse.GenerateImpulse();
-        _gottemSound.Play();
         _pulser.Pulse();
     }
 
