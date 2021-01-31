@@ -18,11 +18,20 @@ public class BoyfriendBehaviour : MonoBehaviour {
     
     private Vector3 _movement = default;
     private Vector3 _aimPoint = default;
+    bool _canMove = true;
 
+    Vector3 SelfMovement =>  -Auxiliary.GetFloorProjection(_activeRagdoll.PhysicalTorso.position).normalized;
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, _playerRadiusSense);
+    }
+
+    public void SetCanMove(bool canMove) => _canMove = canMove;
+
+    void Start()
+    {
+        _physicsModule.TargetDirection = SelfMovement;
     }
 
     private void Update() 
@@ -30,7 +39,7 @@ public class BoyfriendBehaviour : MonoBehaviour {
         var playerInRadius = Vector3.Distance(_follow.position, _activeRagdoll.PhysicalTorso.position) < _playerRadiusSense;
         var playerDirection = (_follow.position - _activeRagdoll.PhysicalTorso.position).normalized;
         Vector3 floorDirection = Auxiliary.GetFloorProjection(playerDirection);
-        _movement = playerInRadius ? floorDirection.normalized : Vector3.zero;
+        _movement = playerInRadius && _canMove ? floorDirection.normalized : Vector3.zero;
         _animationModule.AimDirection = _movement;
 
         Debug.DrawRay(_activeRagdoll.PhysicalTorso.position, floorDirection * 3, Color.red);
@@ -41,7 +50,7 @@ public class BoyfriendBehaviour : MonoBehaviour {
             _animationModule.Animator.SetFloat("speed", _movement.magnitude);        
 
             // TODO(make the grab point towards mouse position!!)
-            _physicsModule.TargetDirection = _movement * _movementScalar;
+            _physicsModule.TargetDirection = _movement;
         }
         else
         {

@@ -14,6 +14,7 @@ namespace ActiveRagdoll {
         public event Action<float> onLeftArm;
         public event Action<float> onRightArm;
         public event Action<bool> onFloorChanged;
+        public event Action onQuit;
         // ---------- INTERNAL INPUT ----------
 
         [Header("Floot")]
@@ -32,6 +33,7 @@ namespace ActiveRagdoll {
 
         void OnMove(InputValue value) => onMove?.Invoke(value.Get<Vector2>());
         void OnAim(InputValue value) => onAim?.Invoke(value.Get<Vector2>());
+        void OnQuit(InputValue value) => onQuit?.Invoke();
 
         void OnLeftArm(InputValue value) 
         {

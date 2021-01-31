@@ -1,6 +1,5 @@
 using UnityEngine;
 using DG.Tweening;
-using System.Collections;
 
 [RequireComponent(typeof(Light))]
 public class LightPulseOnEvent : MonoBehaviour 

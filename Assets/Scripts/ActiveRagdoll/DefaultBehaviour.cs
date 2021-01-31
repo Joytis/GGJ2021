@@ -35,12 +35,22 @@ public class DefaultBehaviour : MonoBehaviour {
         _input.onMove += _physicsModule.ManualTorqueInput;
         _input.onAim += AimInput;
         _input.onFloorChanged += ProcessFloorChanged;
+        _input.onQuit += QuitGame;
 
         _input.onLeftArm += _animationModule.UseLeftArm;
         _input.onLeftArm += _gripModule.UseLeftGrip;
         _input.onRightArm += _animationModule.UseRightArm;
         _input.onRightArm += _gripModule.UseRightGrip;
     }    
+
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
     
     private void Update() {
         // Project camera vectors onto the ground plane, and then normalize them for our move direction!
