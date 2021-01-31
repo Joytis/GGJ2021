@@ -6,6 +6,7 @@ public class CollisionEvents : MonoBehaviour
     [SerializeField] bool _triggerOnce = default;
     [SerializeField] LayerMask _mask = default;
     [SerializeField] UnityEvent _event = default;
+    [SerializeField] UnityEvent<Collision> _eventWithInfo = default;
     bool _happened = false;
 
     void OnCollisionEnter(Collision other)
