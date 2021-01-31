@@ -71,7 +71,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.00000019214664, y: 0.2461554, z: -0.0000003723674}
+  m_ConnectedAnchor: {x: 0.00000019331118, y: 0.24615537, z: 0.00000013549126}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 0, z: -1}
   m_XMotion: 0
@@ -1270,7 +1270,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.00000019261246, y: 0.2461554, z: -0.0000003723674}
+  m_ConnectedAnchor: {x: -0.00000019377698, y: 0.24615537, z: 0.00000013549126}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 0, z: -1}
   m_XMotion: 0
@@ -2484,8 +2484,8 @@ MonoBehaviour:
   maxManualRotSpeed: 3.5
   _stabilizerJointDrive:
     _positionSpring: 1500
-    _positionDamper: 50
-    _maximumForce: 800
+    _positionDamper: 20
+    _maximumForce: 1200
   freezeRotationSpeed: 5
 --- !u!114 &817685254
 MonoBehaviour:
@@ -2500,7 +2500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _activeRagdoll: {fileID: 8894856259471134340}
-  _animationSpeed: 1
+  _animationSpeed: 1.13
   _speedDelta: 0
   _enableIK: 0
   minTargetDirAngle: -30
