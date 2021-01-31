@@ -63,6 +63,8 @@ namespace ActiveRagdoll {
             _source.Play();
         }
 
+        public void ForceUngrip() => UnGrip();
+
         private void UnGrip() {
             if (_joint == null)
                 return;

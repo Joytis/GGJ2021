@@ -38,6 +38,12 @@ namespace ActiveRagdoll
             (_rightGrip = rightHand.AddComponent<Gripper>()).GripMod = this;
         }
 
+        public void ForceUngrip()
+        {
+            _leftGrip.ForceUngrip();
+            _rightGrip.ForceUngrip();
+        }
+
 
         public void UseLeftGrip(float weight) {
             _leftGrip.enabled = weight > leftArmWeightThreshold;

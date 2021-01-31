@@ -18,12 +18,14 @@ public class VolumePulseOnEvent : MonoBehaviour
     {
         _volume = GetComponent<Volume>();
         _initialWeight = _volume.weight;
+        _volume.weight = 0f;
+        _volume.enabled = true;
     }
     
-    void OnEnable() => _channel.AddListener(Pulse);
-    void OnDisable() => _channel.RemoveListener(Pulse);
+    void OnEnable() => _channel?.AddListener(Pulse);
+    void OnDisable() => _channel?.RemoveListener(Pulse);
 
-    void Pulse()
+    public void Pulse()
     {
         // Then pulse
         _tween?.Kill();

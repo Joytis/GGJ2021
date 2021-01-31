@@ -37,11 +37,12 @@ public class FriendBehavior : MonoBehaviour, IGrippable
     _animationModule.PlayAnimation("Default");
   }
 
-  public void PutInUber()
-  {
-    GameStateManager.Instance.FriendFound();
-    Debug.Log("Friend put in uber!");
-    // This fails
-    // Destroy(this.gameObject);
-  }
+  // NOTE(clark): Unable to do this here due to nested rigidbodies unfortunately. Moved to the GameStateManager. 
+//   public void PutInUber()
+//   {
+//     GameStateManager.Instance.FriendFound();
+//     Debug.Log("Friend put in uber!");
+//     // This fails
+//     // Destroy(this.gameObject);
+//   }
 }
