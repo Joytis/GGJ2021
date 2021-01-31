@@ -48,14 +48,14 @@ public class GameStateManager : MonoBehaviour
 
     IEnumerator DoFriendExplosion(FriendMap friend)
     {
-        yield return new WaitForSeconds(0.3f);
         _gottemSound.Play();
+        yield return new WaitForSeconds(1f);
 
         // Blow up friend and make some particles. 
-        var friendTransform = friend.friend.gameObject.transform;
+        var friendTransform = friend.friend.PhysicalTransform;
         var explosion = Instantiate(_explosionPrefab, friendTransform.position, friendTransform.rotation);
         // Blow up the explosion GO after a couple seconds
-        Destroy(explosion, 2.0f);
+        Destroy(explosion, 6.0f);
         // blow up the friend. 
         // Ensure that a player has ungripped a friend before blowing them up. 
         _playerGripModule.ForceUngrip();

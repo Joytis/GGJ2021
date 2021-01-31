@@ -16,7 +16,6 @@ public class RagdollCollisionEvents : MonoBehaviour
 
     void RagdollCollisionEnter(Collision other)
     {
-        Debug.Log("Collided!");
         // Check if this has already happened. 
         if(_triggerOnce && _happened) return;
         

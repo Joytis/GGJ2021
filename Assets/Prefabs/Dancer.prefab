@@ -1776,6 +1776,23 @@ ConfigurableJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &4999658078122554980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6221418481655764473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 623265c8e582da243ae97f9ec5d853b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _headGear:
+  - {fileID: 2354744112401793875, guid: d9799ec913808fa44812256967453750, type: 3}
+  - {fileID: 3648892860141883151, guid: f4d858e6af3ef6f479dd9f0da24f0636, type: 3}
+  - {fileID: 712903590036987523, guid: a8ae4b1f901afd844b49d358df7ffcf3, type: 3}
+  _gearRange: {x: 0, y: 3}
 --- !u!114 &5672686687586182799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1793,22 +1810,6 @@ MonoBehaviour:
   - {fileID: 3335315587415671249, guid: 4b8ad75ec668866458adbc4ea6a4dc35, type: 3}
   - {fileID: 2262464961052690246, guid: 09437dd275bdeee43a77616fd5c959c7, type: 3}
   _gearRange: {x: 1, y: 1}
---- !u!114 &4999658078122554980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6221418481655764473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 623265c8e582da243ae97f9ec5d853b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _headGear:
-  - {fileID: 2354744112401793875, guid: d9799ec913808fa44812256967453750, type: 3}
-  - {fileID: 3648892860141883151, guid: f4d858e6af3ef6f479dd9f0da24f0636, type: 3}
-  _gearRange: {x: 0, y: 3}
 --- !u!54 &7604648703193897216
 Rigidbody:
   m_ObjectHideFlags: 0

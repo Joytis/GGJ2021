@@ -14,6 +14,8 @@ public class FriendBehavior : MonoBehaviour, IGrippable
   private Vector2 _movement = default;
   private Vector2 _aimPoint = default;
 
+	public Transform PhysicalTransform => _activeRagdoll.PhysicalTorso.transform;
+
   void Start()
   {
     _physicsModule.TargetDirection = Auxiliary.GetFloorProjection(_activeRagdoll.PhysicalTorso.position).normalized;
