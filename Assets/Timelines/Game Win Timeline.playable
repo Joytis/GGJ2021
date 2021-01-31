@@ -704,7 +704,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bfda56da833e2384a9677cd3c976a436, type: 3}
-  m_Name: Game End Timeline
+  m_Name: Game Win Timeline
   m_EditorClassIdentifier: 
   m_Version: 0
   m_Tracks:
@@ -1101,7 +1101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f10dd60657c6004587f237a7e90f8e4, type: 3}
   m_Name: AudioPlayableAsset
   m_EditorClassIdentifier: 
-  m_Clip: {fileID: 8300000, guid: f94432bb4d13b2442a0cf6e35a71c42c, type: 3}
+  m_Clip: {fileID: 8300000, guid: ad092b97e907db4489db0e2a17094990, type: 3}
   m_Loop: 0
   m_bufferingTime: 0.1
   m_ClipProperties:
